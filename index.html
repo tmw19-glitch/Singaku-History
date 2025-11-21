@@ -14,30 +14,31 @@
         }
         /* カスタムスタイル */
         .timeline-container {
-            max-width: 1200px;
+            max-width: 1400px; /* 横幅を広げてPCで見やすく */
             margin: 0 auto;
         }
         .timeline-header {
             display: grid;
-            grid-template-columns: 80px 100px 1fr 1fr; /* 時代、年、日本史、神道 */
-            gap: 1px;
-            background-color: #e5e7eb; /* 枠線代わりの背景色 */
-            border: 1px solid #e5e7eb;
+            grid-template-columns: 100px 120px 1fr 1fr; /* 時代、年、日本史、神道 の幅を調整 */
+            gap: 2px; /* 枠線を少し太く */
+            background-color: #cbd5e1; /* 枠線の色を調整 */
+            border: 2px solid #cbd5e1;
         }
         .timeline-row {
             display: grid;
-            grid-template-columns: 80px 100px 1fr 1fr;
-            gap: 1px;
-            background-color: #e5e7eb; /* 枠線代わりの背景色 */
-            border-left: 1px solid #e5e7eb;
-            border-right: 1px solid #e5e7eb;
-            border-bottom: 1px solid #e5e7eb;
+            grid-template-columns: 100px 120px 1fr 1fr;
+            gap: 2px;
+            background-color: #cbd5e1;
+            border-left: 2px solid #cbd5e1;
+            border-right: 2px solid #cbd5e1;
+            border-bottom: 2px solid #cbd5e1;
         }
         .timeline-cell {
             background-color: white;
-            padding: 1rem;
+            padding: 1.5rem; /* パディングを増やしてゆとりを持たせる */
             display: flex;
-            align-items: flex-start; /* 上揃え */
+            align-items: flex-start;
+            line-height: 1.8; /* 行間を広げる */
         }
         .cell-center {
             justify-content: center;
@@ -52,14 +53,15 @@
             padding: 0.5rem 0.2rem;
             font-weight: bold;
             color: white;
-            border-radius: 4px;
+            border-radius: 6px;
             width: 100%;
             text-align: center;
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 80px;
-            letter-spacing: 0.1em;
+            min-height: 100px; /* 高さを確保 */
+            letter-spacing: 0.15em;
+            font-size: 1.1rem; /* バッジの文字も大きく */
         }
         .era-ancient { background-color: #4f46e5; } /* 古代: Indigo */
         .era-medieval { background-color: #059669; } /* 中世: Emerald */
@@ -67,77 +69,58 @@
         .era-modern { background-color: #dc2626; } /* 近代: Red */
         .era-contemporary { background-color: #0891b2; } /* 現代: Cyan */
 
-        /* レスポンシブ対応 */
+        /* レスポンシブ対応（PC優先ですが、崩れないように残しています） */
         @media (max-width: 768px) {
             .timeline-header {
-                display: none; /* モバイルではヘッダーを隠す */
+                display: none;
             }
             .timeline-row {
-                grid-template-columns: 1fr; /* 1列にする */
+                grid-template-columns: 1fr;
                 gap: 0;
                 margin-bottom: 1.5rem;
                 border: 1px solid #e5e7eb;
-                border-radius: 0.5rem;
-                overflow: hidden;
-                box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
             }
             .timeline-cell {
-                padding: 0.75rem 1rem;
+                padding: 1rem;
             }
             .era-badge {
                 writing-mode: horizontal-tb;
                 width: auto;
-                display: inline-block;
                 min-height: auto;
-                padding: 0.25rem 0.75rem;
-                margin-bottom: 0.5rem;
-            }
-            .mobile-label {
-                font-weight: bold;
-                color: #6b7280;
-                font-size: 0.875rem;
-                margin-bottom: 0.25rem;
-                display: block;
-            }
-            /* モバイル時のセルの並び替えと結合 */
-            .cell-era-year {
-                background-color: #f3f4f6;
-                border-bottom: 1px solid #e5e7eb;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
+                padding: 0.5rem 1rem;
             }
         }
     </style>
 </head>
-<body class="bg-slate-50 text-gray-800 p-4 md:p-8">
+<!-- text-lg (約18px) をベースサイズに設定 -->
+<body class="bg-slate-50 text-gray-800 p-4 md:p-10 text-lg">
 
     <div class="timeline-container">
-        <header class="text-center mb-10">
-            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">神道学・神職制度と日本史の比較年表</h1>
-            <p class="text-gray-600 max-w-2xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">神道学・神職制度と日本史の比較年表</h1>
+            <p class="text-gray-600 max-w-4xl mx-auto text-xl">
                 提供資料に基づき、日本史の政治的動向と、神道思想の成立・神職制度の変遷を対比しています。
             </p>
         </header>
 
         <!-- PC用ヘッダー -->
-        <div class="timeline-header sticky top-0 z-10 shadow-md rounded-t-lg overflow-hidden hidden md:grid">
-            <div class="bg-gray-800 text-white p-3 font-bold text-center flex items-center justify-center">時代</div>
-            <div class="bg-gray-800 text-white p-3 font-bold text-center flex items-center justify-center">年</div>
-            <div class="bg-gray-800 text-white p-3 font-bold flex items-center justify-center border-l border-gray-600">日本史の主な出来事</div>
-            <div class="bg-indigo-900 text-white p-3 font-bold flex items-center justify-center border-l border-gray-600">神道学・神職制度の変遷</div>
+        <div class="timeline-header sticky top-0 z-10 shadow-md rounded-t-lg overflow-hidden hidden md:grid text-xl">
+            <div class="bg-gray-800 text-white p-4 font-bold text-center flex items-center justify-center">時代</div>
+            <div class="bg-gray-800 text-white p-4 font-bold text-center flex items-center justify-center">年</div>
+            <div class="bg-gray-800 text-white p-4 font-bold flex items-center justify-center border-l border-gray-600">日本史の主な出来事</div>
+            <div class="bg-indigo-900 text-white p-4 font-bold flex items-center justify-center border-l border-gray-600">神道学・神職制度の変遷</div>
         </div>
 
         <!-- タイムライン本体 -->
-        <div class="bg-white shadow-lg rounded-b-lg overflow-hidden md:rounded-t-none rounded-t-lg">
+        <div class="bg-white shadow-xl rounded-b-lg overflow-hidden md:rounded-t-none rounded-t-lg">
 
             <!-- 古代・飛鳥 -->
             <div class="timeline-row">
-                <!-- PC: Era & Year / Mobile: Header -->
+                <!-- PC: Era & Year -->
                 <div class="timeline-cell cell-center md:row-span-1 hidden md:flex">
                     <span class="era-badge era-ancient">飛鳥</span>
                 </div>
-                <div class="timeline-cell cell-center font-bold text-lg hidden md:flex">7世紀<br>後半</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">7世紀<br>後半</div>
 
                 <!-- Mobile Header Equivalent -->
                 <div class="timeline-cell cell-era-year md:hidden">
@@ -145,170 +128,170 @@
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li><span class="font-bold">天武天皇</span>の時代(673-686)</li>
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-bold text-indigo-900">天武天皇</span>の時代(673-686)</li>
                         <li>壬申の乱(672)を経て天皇を中心とする国づくりが進む</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-indigo-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-indigo-800 mb-1">【神道の概念形成】</p>
-                    <p class="text-sm">天武天皇の時代に国史編纂が構想され、これが神道の概念形成に決定的な影響を与えたとされる。</p>
+                <div class="timeline-cell flex-col bg-indigo-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-indigo-800 mb-2 text-xl">【神道の概念形成】</p>
+                    <p>天武天皇の時代に国史編纂が構想され、これが神道の概念形成に決定的な影響を与えたとされる。</p>
                 </div>
             </div>
 
             <!-- 奈良 701 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-ancient">飛鳥<br>奈良</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">701</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">701</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-ancient">飛鳥・奈良</span> <span class="font-bold ml-2">701年</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <p class="text-sm"><span class="font-bold">大宝律令</span>が制定される。</p>
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <p><span class="font-bold text-indigo-900">大宝律令</span>が制定される。</p>
                 </div>
-                <div class="timeline-cell flex-col bg-indigo-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm">律令体制の確立とともに、中央に<span class="font-bold text-indigo-700">神祇官</span>が設置される。</p>
+                <div class="timeline-cell flex-col bg-indigo-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p>律令体制の確立とともに、中央に<span class="font-bold text-indigo-700 text-xl">神祇官</span>が設置される。</p>
                 </div>
             </div>
 
             <!-- 奈良 712-720 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-ancient">奈良</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">712<br>720</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">712<br>720</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-ancient">奈良</span> <span class="font-bold ml-2">712・720年</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
                         <li>710年 平城京遷都</li>
-                        <li>712年 <span class="font-bold">『古事記』</span>編纂（元明天皇）</li>
-                        <li>720年 <span class="font-bold">『日本書紀』</span>編纂（元正天皇）</li>
+                        <li>712年 <span class="font-bold text-indigo-900">『古事記』</span>編纂（元明天皇）</li>
+                        <li>720年 <span class="font-bold text-indigo-900">『日本書紀』</span>編纂（元正天皇）</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-indigo-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-indigo-800 mb-1">【神話の体系化と祭祀氏族】</p>
-                    <p class="text-sm mb-2">記紀の編纂により、神代の物語と神武天皇の建国譚が記述され、天皇家支配の正統性が理論づけられる。</p>
-                    <p class="text-sm">中央では中臣氏・忌部氏などの祭祀氏族が祭祀を担う一方、地方（例：宗像大社）では在地権威としての神主が存続。</p>
+                <div class="timeline-cell flex-col bg-indigo-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-indigo-800 mb-2 text-xl">【神話の体系化と祭祀氏族】</p>
+                    <p class="mb-3">記紀の編纂により、神代の物語と神武天皇の建国譚が記述され、天皇家支配の正統性が理論づけられる。</p>
+                    <p>中央では中臣氏・忌部氏などの祭祀氏族が祭祀を担う一方、地方（例：宗像大社）では在地権威としての神主が存続。</p>
                 </div>
             </div>
 
             <!-- 中世 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-medieval">室町</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">15世紀</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">15世紀</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-medieval">室町</span> <span class="font-bold ml-2">15世紀</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
                         <li>1467年 応仁の乱</li>
                         <li>戦国時代の幕開け</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-green-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm">吉田神道が創始される（黒田俊雄説による神道の成立時期）。<br>儒教・仏教の影響を受けた神道説が展開される。</p>
+                <div class="timeline-cell flex-col bg-green-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p>吉田神道が創始される（黒田俊雄説による神道の成立時期）。<br>儒教・仏教の影響を受けた神道説が展開される。</p>
                 </div>
             </div>
 
             <!-- 近世：本居宣長 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-early-modern">江戸</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">18世紀<br>中頃</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">18世紀<br>中頃</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-early-modern">江戸</span> <span class="font-bold ml-2">18世紀中頃</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <p class="text-sm">徳川吉宗（享保の改革）〜田沼意次の時代。</p>
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <p>徳川吉宗（享保の改革）〜田沼意次の時代。</p>
                 </div>
-                <div class="timeline-cell flex-col bg-orange-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-orange-800 mb-1">【国学の確立】</p>
-                    <p class="text-sm mb-2"><span class="font-bold">本居宣長</span> (1730-1801) が活躍。</p>
-                    <p class="text-sm">儒教・仏教（垂加神道など）の哲学的影響を批判し、「神の御所為」に基づく純粋な日本固有の「古道」を提唱。神道学の学問的自立の基盤を作る。</p>
+                <div class="timeline-cell flex-col bg-orange-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-orange-800 mb-2 text-xl">【国学の確立】</p>
+                    <p class="mb-3"><span class="font-bold text-orange-900 text-xl">本居宣長</span> (1730-1801) が活躍。</p>
+                    <p>儒教・仏教（垂加神道など）の哲学的影響を批判し、「神の御所為」に基づく純粋な日本固有の「古道」を提唱。神道学の学問的自立の基盤を作る。</p>
                 </div>
             </div>
 
             <!-- 近世：平田篤胤 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-early-modern">江戸</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">19世紀<br>幕末</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">19世紀<br>幕末</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-early-modern">江戸</span> <span class="font-bold ml-2">19世紀（幕末）</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
                         <li>欧米列強の接近（1853 ペリー来航）</li>
                         <li>尊王攘夷運動の高まり</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-orange-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-orange-800 mb-1">【復古神道と尊王攘夷】</p>
-                    <p class="text-sm mb-2"><span class="font-bold">平田篤胤</span> (1776-1843) による復古神道の提唱。</p>
-                    <p class="text-sm">天皇が統治する国体論を強調し、尊王攘夷運動の思想的支柱となる。明治維新の推進力の一つへ。</p>
+                <div class="timeline-cell flex-col bg-orange-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-orange-800 mb-2 text-xl">【復古神道と尊王攘夷】</p>
+                    <p class="mb-3"><span class="font-bold text-orange-900 text-xl">平田篤胤</span> (1776-1843) による復古神道の提唱。</p>
+                    <p>天皇が統治する国体論を強調し、尊王攘夷運動の思想的支柱となる。明治維新の推進力の一つへ。</p>
                 </div>
             </div>
 
             <!-- 近代：明治維新 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-modern">明治</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">1867<br>1868</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">1867<br>1868</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-modern">明治</span> <span class="font-bold ml-2">1867-68年</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
                         <li>1867年 大政奉還、王政復古の大号令</li>
                         <li>1868年 五箇条の御誓文</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-red-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-red-800 mb-1">【祭政一致】</p>
-                    <p class="text-sm">「祭政一致の布告」に基づき、古代の<span class="font-bold">神祇官</span>が復興される（後に神祇省→教部省→内務省と変遷）。</p>
+                <div class="timeline-cell flex-col bg-red-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-red-800 mb-2 text-xl">【祭政一致】</p>
+                    <p>「祭政一致の布告」に基づき、古代の<span class="font-bold text-red-900 text-xl">神祇官</span>が復興される（後に神祇省→教部省→内務省と変遷）。</p>
                 </div>
             </div>
 
             <!-- 近代：国家神道体制 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-modern">明治</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">1871</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">1871</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-modern">明治</span> <span class="font-bold ml-2">1871年</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
                         <li>廃藩置県</li>
                         <li>岩倉使節団派遣</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-red-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-red-800 mb-1">【神職の官吏化と世襲廃止】</p>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>神社を<span class="font-bold text-red-600">「国家の宗祀」</span>と宣言。</li>
-                        <li><span class="font-bold">近代社格制度</span>（官幣社・国幣社など）の制定。</li>
+                <div class="timeline-cell flex-col bg-red-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-red-800 mb-2 text-xl">【神職の官吏化と世襲廃止】</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>神社を<span class="font-bold text-red-700 text-xl">「国家の宗祀」</span>と宣言。</li>
+                        <li><span class="font-bold text-red-900">近代社格制度</span>（官幣社・国幣社など）の制定。</li>
                         <li>社寺領上知令により社領を国有化。</li>
-                        <li><span class="font-bold">世襲神職の廃止</span>。神職は国の「官吏（公務員）」と位置づけられる。</li>
+                        <li><span class="font-bold text-red-900">世襲神職の廃止</span>。神職は国の「官吏（公務員）」と位置づけられる。</li>
                     </ul>
                 </div>
             </div>
@@ -316,47 +299,47 @@
             <!-- 近代：政教分離の論理 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-modern">明治</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">1882</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">1882</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-modern">明治</span> <span class="font-bold ml-2">1882年</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <p class="text-sm">自由民権運動の時期。大日本帝国憲法制定(1889)への準備期。</p>
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <p>自由民権運動の時期。大日本帝国憲法制定(1889)への準備期。</p>
                 </div>
-                <div class="timeline-cell flex-col bg-red-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-red-800 mb-1">【神官教導職分離】</p>
-                    <p class="text-sm mb-2">神職の布教・葬儀などの宗教的活動を制限。</p>
-                    <p class="text-sm bg-white p-2 border border-red-100 rounded">
-                        <span class="font-bold text-xs text-gray-500 block mb-1">神社非宗教論</span>
-                        神社は「宗教」ではなく「祖先の祭り・国家の儀礼」であるとし、信教の自由（憲法）との矛盾を回避する論理が確立される。
-                    </p>
+                <div class="timeline-cell flex-col bg-red-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-red-800 mb-2 text-xl">【神官教導職分離】</p>
+                    <p class="mb-3">神職の布教・葬儀などの宗教的活動を制限。</p>
+                    <div class="bg-white p-4 border border-red-200 rounded-lg shadow-sm">
+                        <span class="font-bold text-base text-gray-500 block mb-1">神社非宗教論</span>
+                        <p class="text-base">神社は「宗教」ではなく「祖先の祭り・国家の儀礼」であるとし、信教の自由（憲法）との矛盾を回避する論理が確立される。</p>
+                    </div>
                 </div>
             </div>
 
             <!-- 現代：戦後 -->
             <div class="timeline-row">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-contemporary">昭和</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">1945<br>1946</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">1945<br>1946</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-contemporary">昭和</span> <span class="font-bold ml-2">1945-46年</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <ul class="list-disc list-inside text-sm space-y-1">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <ul class="list-disc list-inside space-y-2">
                         <li>1945年 ポツダム宣言受諾、終戦</li>
                         <li>1946年 日本国憲法公布</li>
                     </ul>
                 </div>
-                <div class="timeline-cell flex-col bg-cyan-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-cyan-800 mb-1">【国家神道の解体と再出発】</p>
-                    <ul class="list-disc list-inside text-sm space-y-1">
-                        <li>GHQによる<span class="font-bold">神道指令</span>（国家神道の廃止）。</li>
-                        <li><span class="font-bold">神社本庁</span>設立。</li>
+                <div class="timeline-cell flex-col bg-cyan-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-cyan-800 mb-2 text-xl">【国家神道の解体と再出発】</p>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>GHQによる<span class="font-bold text-cyan-900 text-xl">神道指令</span>（国家神道の廃止）。</li>
+                        <li><span class="font-bold text-cyan-900 text-xl">神社本庁</span>設立。</li>
                         <li>神職は公務員から、宗教法人に属する民間人（自律的な専門職集団）へ移行。</li>
                     </ul>
                 </div>
@@ -365,25 +348,25 @@
             <!-- 現代：現在 -->
             <div class="timeline-row border-b-0">
                 <div class="timeline-cell cell-center hidden md:flex"><span class="era-badge era-contemporary">現代</span></div>
-                <div class="timeline-cell cell-center font-bold hidden md:flex">-</div>
+                <div class="timeline-cell cell-center font-bold text-xl hidden md:flex">-</div>
                 <div class="timeline-cell cell-era-year md:hidden">
                     <div><span class="era-badge era-contemporary">現代</span></div>
                 </div>
 
                 <div class="timeline-cell flex-col">
-                    <span class="mobile-label md:hidden">日本史</span>
-                    <p class="text-sm">戦後の平和国家としての歩み。</p>
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">日本史</span>
+                    <p>戦後の平和国家としての歩み。</p>
                 </div>
-                <div class="timeline-cell flex-col bg-cyan-50/50">
-                    <span class="mobile-label md:hidden">神道・神職</span>
-                    <p class="text-sm font-semibold text-cyan-800 mb-1">【専門職としての確立】</p>
-                    <p class="text-sm">皇學館大学などの大学課程や神務実習を経て資格（階位）を取得する、専門的な養成システムが確立されている。</p>
+                <div class="timeline-cell flex-col bg-cyan-50/60">
+                    <span class="mobile-label md:hidden text-sm text-gray-500 mb-1">神道・神職</span>
+                    <p class="font-bold text-cyan-800 mb-2 text-xl">【専門職としての確立】</p>
+                    <p>皇學館大学などの大学課程や神務実習を経て資格（階位）を取得する、専門的な養成システムが確立されている。</p>
                 </div>
             </div>
 
         </div>
         
-        <footer class="mt-8 text-center text-xs text-gray-500 pb-8">
+        <footer class="mt-12 text-center text-base text-gray-500 pb-12">
             <p>出典：アップロード資料「神道学と神主の歴史」「日本史年表」</p>
         </footer>
     </div>
